@@ -26,8 +26,12 @@
   </tr>
 <% end %>
 </table>
-
 <br />
-
+Download:
+  <%= link_to "CSV", locations_path(format: "csv") %> 
+<%= form_tag import_locations_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "Import" %>
+<% end %>
 <%= button_to "New Location", new_location_path, :method => "get" %>
 </div>

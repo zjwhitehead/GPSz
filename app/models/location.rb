@@ -8,19 +8,36 @@ class Location < ActiveRecord::Base
 
 	def geocode?
 
-	(!address.blank? && (latitude.blank? || longitude.blank?)) || address_changed?
+		(!address.blank? && (latitude.blank? || longitude.blank?)) || address_changed?
 
 	end
 
 	def gmaps4rails_address
 
-	address
+		address
 
+	end
+
+	def self.to_csv
+	  CSV.generate do |csv|
+	    csv << column_names
+	    all.each do |location|
+	      csv << location.attributes.values_at(*column_names)
+	    end
+	  end
 	end
 
 	def gmaps4rails_infowindow
 
-	"<h4>#{name}</h4>" << "#{address} <br />" << "<i>Made by Zach Whitehead</i>" 
+		"<h4>#{name}</h4>" << "#{address} <br />" << "<i>Made by Zach Whitehead</i>"
+	end
 
+	def self.import(file)
+	CSV.foreach(file.path, headers: true) do |row|
+	  locations = find_by_id(row["id"]) || new
+	  locations.attributes = row.to_hash.slice(*accessible_attributes)
+	  location.save!
+	end
 end
+
 end

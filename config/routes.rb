@@ -1,5 +1,7 @@
 GoogleMap::Application.routes.draw do
-  resources :locations
+  resources :locations do
+    collection { post :import }
+  end
 
 
   # The priority is based upon order of creation:

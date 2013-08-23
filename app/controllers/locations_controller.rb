@@ -3,12 +3,19 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = Location.all
+    @csv_locations = Location.order(:name)
     @json = Location.all.to_gmaps4rails
 
     respond_to do |format|
       format.html # index.html.erb
+      format.csv { render text: @csv_locations.to_csv }
       format.json { render json: @locations }
     end
+  end
+
+  def import
+    Location.import(params[:file])
+    redirect_to root_url, notice: "Locations imported."
   end
 
   # GET /locations/1
