@@ -1,4 +1,6 @@
-<%= gmaps("map_options" => {"zoom" => 6, "auto_adjust" => false},"markers" => { "data" => @json }) %>
+<%= gmaps("map_options" => {"zoom" => 14, "auto_adjust" => false, "center_latitude" => @location.latitude, "center_longitude" => @location.longitude ,},
+	"markers" => { "data" => @json }) %>
+
 <p id="notice"><%= notice %></p>
 <div id='container'>
 <p>
