@@ -20,7 +20,7 @@ class Location < ActiveRecord::Base
 
 	def gmaps4rails_infowindow
 
-	"<h4>#{name}</h4>" << "<h5>#{address}</h5>" << "<i>Made by Zach Whitehead</i>" 
+	"<h4>#{name}</h4>" << "#{address} <br />" << "<i>Made by Zach Whitehead</i>" 
 
 end
 end
