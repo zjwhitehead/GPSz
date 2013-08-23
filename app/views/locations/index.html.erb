@@ -5,13 +5,10 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Address</th>
+    <th><%= sortable "Name" %></th>
+    <th><%= sortable "Address" %></th>
     <th>Longitude</th>
     <th>Latitude</th>
-    <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @locations.each do |location| %>
@@ -22,7 +19,7 @@
     <td><%= location.latitude %></td>
     <td><%= link_to 'Show', location %></td>
     <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Delete', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
