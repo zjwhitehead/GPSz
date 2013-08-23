@@ -1,5 +1,6 @@
+<%= gmaps("map_options" => {"zoom" => 6, "auto_adjust" => false},"markers" => { "data" => @json }) %>
 <p id="notice"><%= notice %></p>
-
+<div id='container'>
 <p>
   <b>Name:</b>
   <%= @location.name %>
@@ -20,7 +21,6 @@
   <%= @location.latitude %>
 </p>
 
-
 <%= link_to 'Edit', edit_location_path(@location) %> |
 <%= link_to 'Back', locations_path %>
-<%= gmaps4rails(@json) %>
+</div>
