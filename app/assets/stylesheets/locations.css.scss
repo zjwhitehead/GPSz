@@ -10,4 +10,6 @@
 	left: 80px;
 	padding: 1px 0px 5px 5px;
 	box-shadow: 0 5px 15px #5C5C5C;
+
+	tr:nth-child(even) {background: rgba(128, 128, 128, 0.25)}
 }

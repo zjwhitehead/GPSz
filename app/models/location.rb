@@ -7,15 +7,11 @@ class Location < ActiveRecord::Base
 	:msg => "Sorry, not even Google could figure out where that is"
 
 	def geocode?
-
 		(!address.blank? && (latitude.blank? || longitude.blank?)) || address_changed?
-
 	end
 
 	def gmaps4rails_address
-
 		address
-
 	end
 
 	def self.to_csv
@@ -33,11 +29,8 @@ class Location < ActiveRecord::Base
 	end
 
 	def self.import(file)
-	CSV.foreach(file.path, headers: true) do |row|
-	  locations = find_by_id(row["id"]) || new
-	  locations.attributes = row.to_hash.slice(*accessible_attributes)
-	  location.save!
+		CSV.foreach(file.path, headers: true) do |row|
+			Location.create! row.to_hash
+	    end
 	end
-end
-
 end
