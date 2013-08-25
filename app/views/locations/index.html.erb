@@ -1,34 +1,43 @@
-<%= gmaps4rails(@json) %>
+<%- model_class = Location -%>
+<%= gmaps4rails(@json) %> 
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1> 
+</div>
 
-<div id='container'>
-<h1>Listing locations</h1>
-
-<table>
-  <tr>
-    <th><%= sortable "Name" %></th>
-    <th><%= sortable "Address" %></th>
-    <th>Longitude</th>
-    <th>Latitude</th>
-  </tr>
-
-<% @locations.each do |location| %>
-  <tr>
-    <td><%= location.name %></td>
-    <td><%= location.address %></td>
-    <td><%= location.longitude %></td>
-    <td><%= location.latitude %></td>
-    <td><%= link_to 'Show', location %></td>
-    <td><%= link_to 'Edit', edit_location_path(location) %></td>
-    <td><%= link_to 'Delete', location, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name)%></th>
+      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= link_to location.name, location_path(location), :class => 'tbl_name' %></td>
+        <td><%= location.address %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_location_path(location), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      location_path(location),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-<br />
-Download:
-  <%= link_to "CSV", locations_path(format: "csv") %> 
 <%= form_tag import_locations_path, multipart: true do %>
   <%= file_field_tag :file %>
-  <%= submit_tag "Import" %>
+  <%= submit_tag "Import", :class => 'btn' %>
 <% end %>
-<%= button_to "New Location", new_location_path, :method => "get" %>
-</div>
+
+ <%= link_to "Export CSV", locations_path(format: "csv"), :class => 'btn' %> 
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_location_path,
+            :class => 'btn btn-primary' %>
+            <%= yield :scripts %>
