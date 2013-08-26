@@ -30,6 +30,8 @@
     <% end %>
   </tbody>
 </table>
+<div class="apple_pagination"><%= will_paginate @locations %></div>
+
 <div class="row-fluid extra-buttons">
 <div class="span12">
   <div class"span4">
@@ -39,6 +41,7 @@
     <% end %>
   </div>
   <div class"span3">
+    <%= link_to content_tag(:i, "", :class=>"icon-circle-blank") + " View All", locations_path(""), :class => 'btn' %> 
     <%= link_to content_tag(:i, "", :class=>"icon-save") + " Export CSV", locations_path(format: "csv"), :class => 'btn' %>     
     <%= link_to t('.new', :default => t("helpers.links.new")),
                 new_location_path,
