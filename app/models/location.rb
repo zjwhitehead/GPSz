@@ -16,7 +16,7 @@ class Location < ActiveRecord::Base
 
 	def self.to_csv
 	  CSV.generate do |csv|
-	    csv << ["id","name", "location"]
+	    csv << ["id","name", "location", "time to campus","distance to campus"]
 	    all.each do |location|
 	      csv << [location.id, location.name, location.address]
 
