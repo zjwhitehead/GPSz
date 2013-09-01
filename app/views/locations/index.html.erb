@@ -1,14 +1,28 @@
 <%- model_class = Location -%>
 <%= gmaps4rails(@json) %> 
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1> 
+<div class="row-fluid">
+  <dib class="span4 header-title"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></dib> 
+<div class="span4 offset4 search-form">
+<%= form_tag locations_path, :method => 'get' do %>
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil, :class=> "btn search-btn" %>
+  </p>
+<% end %>
+</div>
+</div>
 </div>
 
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:name)%></th>
-      <th><%= model_class.human_attribute_name(:address) %></th>
+      <th><%= sortable "name" %> </th>
+      <th><%= sortable "address" %></th>
+      <th><%= sortable "city" %></th>
+      <th><%= sortable "state" %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -17,6 +31,8 @@
       <tr>
         <td><%= link_to location.name, location_path(location), :class => 'tbl_name' %></td>
         <td><%= location.address %></td>
+        <td> <%= location.city %> </td>
+        <td> <%= location.state %> </td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_location_path(location), :class => 'btn btn-mini' %>
@@ -30,6 +46,7 @@
     <% end %>
   </tbody>
 </table>
+
 <div class="apple_pagination"><%= will_paginate @locations %></div>
 
 <div class="row-fluid extra-buttons">

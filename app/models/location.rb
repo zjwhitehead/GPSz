@@ -1,8 +1,9 @@
 class Location < ActiveRecord::Base
-  attr_accessible :address, :latitude, :longitude, :name
-  acts_as_gmappable :latitude => 'latitude', :longitude => 'longitude', :process_geocoding => :geocode?,
+  attr_accessible :address, :latitude, :longitude, :name, :city, :state, :zip
+  acts_as_gmappable :latitude => 'latitude', :longitude => 'longitude', :process_geocoding => :geocode?, 
+  :city => "city", :state => "state", :zip => "zip",
 
-	:address => "address", :normalized_address => "address",
+	:address => "address", :normalized_address => "address", :protocol => "https",
 
 	:msg => "Sorry, not even Google could figure out where that is"
 
@@ -11,7 +12,7 @@ class Location < ActiveRecord::Base
 	end
 
 	def gmaps4rails_address
-		address
+		"#{self.address}, #{self.zip} #{self.city}, #{self.country}"  
 	end
 
 	def self.to_csv
@@ -33,5 +34,13 @@ class Location < ActiveRecord::Base
 		CSV.foreach(file.path, headers: true) do |row|
 			Location.create! row.to_hash
 	    end
+	end
+	
+	def self.search(search)
+	  if search
+	    where('name LIKE ?', "%#{search}%")
+	  else
+	    scoped
+	  end
 	end
 end

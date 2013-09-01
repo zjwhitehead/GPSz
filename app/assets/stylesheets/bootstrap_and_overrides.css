@@ -48,3 +48,20 @@
     color: black; }
     .apple_pagination a:hover, .apple_pagination a:focus {
       text-decoration: underline; }
+
+.search-form {
+  display: inline-block;
+}
+
+.search-btn {
+  margin-bottom: 10px;
+}
+
+.header-title {
+  font-size: 36px;
+}
+
+.page-header {
+  padding-bottom:0;
+  margin:20px 0 20px;
+}

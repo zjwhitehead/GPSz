@@ -49,12 +49,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">GoogleMap</a>
+          <%= link_to "MAPz", locations_path, :class => "brand" %>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
+              <li><%= link_to "New", new_location_path %></li>
+              <li><%= link_to "Lorem", "/path2"  %></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

@@ -5,7 +5,7 @@ class LocationsController < ApplicationController
   # GET /locations
   # GET /locations.json
   def index
-    @locations = Location.paginate(:page => params[:page], :per_page => 10).order(sort_column + " " + sort_direction)
+    @locations = Location.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 10)
     # @locations = Location.order(sort_column + " " + sort_direction)
     @csv_locations = Location.order(:name)
     @json = Location.all.to_gmaps4rails
@@ -93,7 +93,6 @@ class LocationsController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 
 private
   
