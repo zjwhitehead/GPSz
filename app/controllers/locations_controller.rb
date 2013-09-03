@@ -8,7 +8,7 @@ class LocationsController < ApplicationController
     @locations = Location.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 10)
     # @locations = Location.order(sort_column + " " + sort_direction)
     @csv_locations = Location.order(:name)
-    @json = Location.all.to_gmaps4rails
+    @json = Location.search(params[:search]).to_gmaps4rails
 
     respond_to do |format|
       format.html # index.html.erb

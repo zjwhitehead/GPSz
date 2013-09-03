@@ -13,7 +13,6 @@
   <dt><strong><%= model_class.human_attribute_name(:latitude) %>:</strong></dt>
   <dd><%= @location.latitude %></dd>
 </dl>
-
     
 
 <div class="form-actions">
@@ -28,7 +27,7 @@
               :class => 'btn btn-danger' %>
 </div>
 
-
+<div id ="instructions">Intructions</div>
 <%= gmaps("map_options" => {"zoom" => 14, "auto_adjust" => false, "center_latitude" => @location.latitude, "center_longitude" => @location.longitude},
 	"markers" => { "data" => @json },
 	"direction"   => { "data" => {"from" => @location.address, "to" => "1972 Clark Ave, Alliance, OH"},"travelMode" => "DRIVING", "display_panel" => true, "panel_id" => "instructions"}) %>

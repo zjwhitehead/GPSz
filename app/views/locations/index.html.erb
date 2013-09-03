@@ -2,8 +2,8 @@
 <%= gmaps4rails(@json) %> 
 <div class="page-header">
 <div class="row-fluid">
-  <dib class="span4 header-title"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></dib> 
-<div class="span4 offset4 search-form">
+  <div class="span4 header-title"><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></div> 
+<div class="span6 text-right offset2 pull-right search-form">
 <%= form_tag locations_path, :method => 'get' do %>
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort] %>
@@ -26,6 +26,11 @@
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
+  <% if (@locations.empty?) %>
+    </table>
+    <h3>No results found</h3>
+    <h4><%= link_to "Create a new entry",new_location_path %></h4>
+  <% end %>
   <tbody>
     <% @locations.each do |location| %>
       <tr>
@@ -66,4 +71,3 @@
   </div>
   </div>
 </div>
-            
