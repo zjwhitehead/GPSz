@@ -6,9 +6,17 @@ class LocationsController < ApplicationController
   # GET /locations.json
   def index
     @locations = Location.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 10)
-    # @locations = Location.order(sort_column + " " + sort_direction)
+    
     @csv_locations = Location.order(:name)
-    @json = Location.search(params[:search]).to_gmaps4rails
+    @json = Location.search(params[:search]).to_gmaps4rails do |location, marker|
+      location_link = view_context.link_to location.name, location_path(location)
+      marker.title location.name
+      marker.infowindow "<h4><u>#{location_link}</u></h4> <i>#{location.address}</i>"
+      marker.picture({:picture => "http://maps.google.com/mapfiles/ms/icons/purple-dot.png",
+     :width   => 32,
+     :height  => 32
+   })
+    end
 
     respond_to do |format|
       format.html # index.html.erb
