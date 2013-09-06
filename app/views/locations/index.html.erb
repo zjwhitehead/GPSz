@@ -16,14 +16,14 @@
 </div>
 </div>
 
-<table class="table table-striped">
+<table class="table table-striped table-hover">
   <thead>
     <tr>
       <th><%= sortable "name" %> </th>
       <th><%= sortable "address" %></th>
       <th><%= sortable "city" %></th>
       <th><%= sortable "state" %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+<!--       <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
     </tr>
   </thead>
   <% if (@locations.empty?) %>
@@ -35,10 +35,10 @@
     <% @locations.each do |location| %>
       <tr>
         <td><%= link_to location.name, location_path(location), :class => 'tbl_name' %></td>
-        <td><%= location.address %></td>
+        <td><%= link_to location.address, location_path(location)%></td>
         <td> <%= location.city %> </td>
         <td> <%= location.state %> </td>
-        <td>
+<!--         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_location_path(location), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
@@ -46,7 +46,7 @@
                       :method => :delete,
                       :data => { :confirm => t('.confirm',:default => 'Delete ' + location.name + '?') },
                       :class => 'btn btn-mini btn-danger delete-btn' %>
-        </td>
+        </td> -->
       </tr>
     <% end %>
   </tbody>
