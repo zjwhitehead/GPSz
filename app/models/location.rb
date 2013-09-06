@@ -27,7 +27,7 @@ class Location < ActiveRecord::Base
 
 	def gmaps4rails_infowindow
 
-		"<h4>#{name}</h4>" << "#{address} <br />" << "<i>Made by Zach Whitehead</i>"
+		"<h4>#{name}</h4> <br> #{address} <br /><i>Made by Zach Whitehead</i>"
 	end
 
 	def self.import(file)
@@ -35,7 +35,9 @@ class Location < ActiveRecord::Base
 			Location.create! row.to_hash
 	    end
 	end
-	
+	def gmaps4rails_title
+      "#{name}"
+    end
 	def self.search(search)
 	  if search
 	    where('name LIKE ?', "%#{search}%")
