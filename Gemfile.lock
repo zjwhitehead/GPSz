@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/apneadiving/Google-Maps-for-Rails.git
+  revision: ebee4c6ceca88ebccd8bb505ecc15a6a18a048d7
+  specs:
+    gmaps4rails (2.0.0.pre)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -40,7 +46,6 @@ GEM
     commonjs (0.2.6)
     erubis (2.7.0)
     execjs (2.0.0)
-    gmaps4rails (1.5.6)
     hike (1.2.3)
     i18n (0.6.1)
     journey (1.0.4)
@@ -132,7 +137,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
-  gmaps4rails
+  gmaps4rails!
   jquery-rails
   less-rails
   rails (= 3.2.13)

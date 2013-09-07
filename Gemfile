@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.13'
-gem 'gmaps4rails'
+gem 'gmaps4rails', :git => 'git://github.com/apneadiving/Google-Maps-for-Rails.git'
 gem 'roo'
 
 # Bundle edge Rails instead:

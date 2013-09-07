@@ -20,10 +20,9 @@
   <thead>
     <tr>
       <th><%= sortable "name" %> </th>
-      <th><%= sortable "address" %></th>
+      <th><%= sortable "address" %></th> <!-- Not sure if should be sortable -->
       <th><%= sortable "city" %></th>
       <th><%= sortable "state" %></th>
-<!--       <th><%=t '.actions', :default => t("helpers.actions") %></th> -->
     </tr>
   </thead>
   <% if (@locations.empty?) %>
@@ -36,17 +35,8 @@
       <tr>
         <td><%= link_to location.name, location_path(location), :class => 'tbl_name' %></td>
         <td><%= link_to location.address, location_path(location)%></td>
-        <td> <%= location.city %> </td>
-        <td> <%= location.state %> </td>
-<!--         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_location_path(location), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      location_path(location),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm',:default => 'Delete ' + location.name + '?') },
-                      :class => 'btn btn-mini btn-danger delete-btn' %>
-        </td> -->
+        <td><%= location.city %> </td>
+        <td><%= location.state %></td>
       </tr>
     <% end %>
   </tbody>
@@ -63,11 +53,11 @@
     <% end %>
   </div>
   <div class"span3">
-    <%= link_to content_tag(:i, "", :class=>"icon-circle-blank") + " View All", locations_path(""), :class => 'btn' %> 
+    <%= link_to content_tag(:i, "", :class=>"icon-circle-blank") + " View All", locations_path, :class => 'btn' %> 
     <%= link_to content_tag(:i, "", :class=>"icon-save") + " Export CSV", locations_path(format: "csv"), :class => 'btn' %>     
     <%= link_to t('.new', :default => t("helpers.links.new")),
                 new_location_path,
-                :class => 'btn btn-primary' %>
+                :class => 'btn btn-primary', :title=> "Add a new entry" %>
   </div>
   </div>
 </div>
